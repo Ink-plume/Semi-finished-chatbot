@@ -1,2 +1,11 @@
 # Semi-finished-chatbot
 一个半成品的chatbot，使用传统的双层RNN（GRU）模型编写了encoder和decoder层，因为没什么意义且占用资源所以没有炼完（去炼transform去了），但该项目包含了全部的数据处理清洗过滤以及词典构建等一系列过程，有一定的参考意义，使用的数据集是小黄鸡的数据集，另附一份douban的数据集，需要更改数据处理的格式和路径以及一些超参（都位于config中））
+
+因为没有炼完当然也没法吃（没有写predict模块），当然，也没有封装，就别想这setup开袋即食了
+如果你不改改直接用的话loss会很高，可以考虑增加GRU的层数，添加attention或者beam
+
+# 以下是各个模块的介绍
+首先的config里保存了全部要用的超参数，prepar_corpus里的data文件夹保存了原始的数据，stopword里保存了一些停用词列表。
+
+XHJ文件夹中保存了主要的代码，其中XHJ_corpus_process对原始语料进行了读取和清洗，word_sequence完成了词频统计，词典构建和句子的序列化，其中包括剪切和填充。
+接着由dataset进行数据的读取，构建编解码器，用seq2seq串联，在train中进行训练。
